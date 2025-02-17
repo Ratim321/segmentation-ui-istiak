@@ -31,25 +31,27 @@ export function ImageSegmentation({ imageSrc, regions }: ImageSegmentationProps)
       <img 
         src={imageSrc} 
         alt="Medical scan" 
-        className="max-w-full h-auto rounded-lg"
+        className="max-w-full h-auto rounded-lg shadow-lg"
       />
       <svg 
-        className="absolute top-0 left-0 w-full h-full pointer-events-none"
+        className="absolute top-0 left-0 w-full h-full"
         style={{ mixBlendMode: 'multiply' }}
       >
-        {regions.map((region) => (
-          <path
-            key={region.id}
-            d={region.coords}
-            className={`
-              fill-blue-500/20 hover:fill-blue-500/40 cursor-pointer transition-all duration-300 pointer-events-auto
-              ${activeRegion === region.id ? 'stroke-blue-400 stroke-[3px]' : 'stroke-white stroke-[2px]'}
-            `}
-            strokeDasharray="4 2"
-            onMouseEnter={() => setActiveRegion(region.id)}
-            onMouseLeave={() => setActiveRegion(null)}
-          />
-        ))}
+        <g className="pointer-events-auto">
+          {regions.map((region) => (
+            <path
+              key={region.id}
+              d={region.coords}
+              className={`
+                fill-blue-500/20 hover:fill-blue-500/40 cursor-pointer transition-all duration-500
+                ${activeRegion === region.id ? 'stroke-blue-400 stroke-[3px] fill-blue-500/30' : 'stroke-white stroke-[2px]'}
+              `}
+              strokeDasharray="4 2"
+              onMouseEnter={() => setActiveRegion(region.id)}
+              onMouseLeave={() => setActiveRegion(null)}
+            />
+          ))}
+        </g>
       </svg>
       {activeRegion && (
         <MultipleTooltips 

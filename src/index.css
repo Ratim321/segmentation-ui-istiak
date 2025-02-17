@@ -1,3 +1,46 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes draw {
+  from {
+    stroke-dashoffset: 20;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-draw {
+  animation: draw 0.5s ease-out forwards;
+}
+
+.animate-slide-right {
+  animation: slideRight 0.3s ease-out forwards;
+}
+
+.animate-slide-right-delay-1 {
+  animation: slideRight 0.3s ease-out 0.1s forwards;
+  opacity: 0;
+}
+
+.animate-slide-right-delay-2 {
+  animation: slideRight 0.3s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+/* Ensure SVG paths can receive hover events */
+svg path {
+  pointer-events: all;
+}
